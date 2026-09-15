@@ -5,6 +5,7 @@ from typing import Any
 
 import yaml
 
+from .lookup_ticket_status.tool import lookup_ticket_status
 from .clarify.tool import ask_user
 from .check_service_status.tool import check_service_status
 from .create_ticket.tool import create_ticket
@@ -31,6 +32,8 @@ TOOL_FUNCTIONS = {
     "format_incident_report": format_incident_report,
     "policy": search_company_policy,
     "create_ticket": create_ticket,
+    "lookup_ticket_status": lookup_ticket_status,
+
 }
 
 
