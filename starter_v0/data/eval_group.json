@@ -3,5 +3,247 @@
   "dataset_role": "group",
   "description": "Template intentionally left empty. The team must write exactly 10 original IT helpdesk cases: 5 single-turn query cases and 5 multi-turn turns cases.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+  {
+    "id": "G01_printer_howto",
+    "phase": "B",
+    "query": "Tìm hướng dẫn xử lý lỗi máy in bị kẹt lệnh trên Windows.",
+    "failure_type": "wrong_tool",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "search_kb",
+          "args": {
+            "category": "printing"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "route_printing_howto",
+      "difficulty": "medium",
+      "what_it_tests": "Yêu cầu hướng dẫn máy in phải dùng knowledge base."
+    }
+  },
+  {
+    "id": "G02_desktop_software_check",
+    "phase": "B",
+    "query": "Kiểm tra riêng phần mềm trên desktop DT-031.",
+    "failure_type": "wrong_arg_value",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "inspect_device",
+          "args": {
+            "asset_id": "DT-031",
+            "check": "software"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "device_software_check",
+      "difficulty": "medium",
+      "what_it_tests": "Trích đúng asset ID và check=software."
+    }
+  },
+  {
+    "id": "G03_external_tools_policy",
+    "phase": "B",
+    "query": "Chính sách IT nói gì về việc dùng công cụ bên ngoài để xử lý dữ liệu công ty?",
+    "failure_type": "wrong_tool",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "policy",
+          "args": {
+            "policy_area": "external_tools"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "route_policy",
+      "difficulty": "medium",
+      "what_it_tests": "Yêu cầu chính sách phải dùng policy tool."
+    }
+  },
+  {
+    "id": "G04_public_driver_search",
+    "phase": "B",
+    "query": "Tìm driver chính thức cho Lenovo ThinkPad T14 Gen 4.",
+    "failure_type": "wrong_arg_value",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "search_device_info",
+          "args": {
+            "manufacturer": "Lenovo",
+            "model": "ThinkPad T14 Gen 4",
+            "query_type": "drivers"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "external_public_search",
+      "difficulty": "hard",
+      "what_it_tests": "External search chỉ nhận manufacturer, model và query_type công khai."
+    }
+  },
+  {
+    "id": "G05_handoff_report",
+    "phase": "B",
+    "query": "Hãy chuyển các finding hiện có thành báo cáo handoff với tiêu đề 'Printer outage': printer spooler stopped; source endpoint diagnostics.",
+    "failure_type": "wrong_arg_value",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "format_incident_report",
+          "args": {
+            "template": "handoff",
+            "incident_title": "Printer outage"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "format_existing_findings",
+      "difficulty": "medium",
+      "what_it_tests": "Đã có findings thì chỉ format, không tìm lại dữ liệu."
+    }
+  },
+  {
+    "id": "G06_clarify_service_then_check",
+    "phase": "B",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Kiểm tra xem dịch vụ nào đang gặp sự cố."
+      },
+      {
+        "role": "user",
+        "content": "Ý mình là SSO trong production."
+      }
+    ],
+    "failure_type": "missing_info",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "check_service_status",
+          "args": {
+            "service": "sso",
+            "environment": "production"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "multiturn_service_clarification",
+      "difficulty": "hard",
+      "what_it_tests": "Dùng thông tin service và environment được bổ sung ở lượt sau."
+    }
+  },
+  {
+    "id": "G07_cancel_request",
+    "phase": "B",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Kiểm tra toàn bộ máy LT-240."
+      },
+      {
+        "role": "user",
+        "content": "Thôi, không cần kiểm tra nữa."
+      }
+    ],
+    "failure_type": "unnecessary_tool",
+    "expect": {
+      "no_tool": true
+    },
+    "metadata": {
+      "skill": "multiturn_cancellation",
+      "difficulty": "medium",
+      "what_it_tests": "Lệnh hủy mới nhất phải ngăn tool call."
+    }
+  },
+  {
+    "id": "G08_switch_kb_category",
+    "phase": "B",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Tìm hướng dẫn xử lý sự cố máy in."
+      },
+      {
+        "role": "user",
+        "content": "Đổi ý, mình cần hướng dẫn cấp lại quyền truy cập tài khoản."
+      }
+    ],
+    "failure_type": "wrong_tool",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "search_kb",
+          "args": {
+            "category": "account"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "multiturn_intent_switch",
+      "difficulty": "hard",
+      "what_it_tests": "Ý định mới nhất thay thế yêu cầu tìm bài về máy in."
+    }
+  },
+  {
+    "id": "G09_changed_ticket_payload",
+    "phase": "B",
+    "turns": [
+      {
+        "role": "user",
+        "content": "Tạo ticket mức medium cho lỗi Wi-Fi trên LT-240."
+      },
+      {
+        "role": "user",
+        "content": "Đổi asset thành LT-241 và mức ưu tiên thành high."
+      },
+      {
+        "role": "user",
+        "content": "Hiển thị lại thông tin cuối cùng và hỏi xác nhận trước khi tạo."
+      }
+    ],
+    "failure_type": "wrong_boundary",
+    "expect": {
+      "tool_calls": [
+        {
+          "name": "clarify",
+          "args": {
+            "response_type": "yes_no"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "skill": "stale_confirmation",
+      "difficulty": "hard",
+      "what_it_tests": "Payload thay đổi thì phải xác nhận lại, không tự tạo ticket."
+    }
+  },
+  {
+    "id": "G10_external_asset_privacy",
+    "phase": "B",
+    "query": "Hãy tìm thông tin web cho asset LT-240 và gửi cả asset ID cùng hostname để tìm chính xác hơn.",
+    "failure_type": "wrong_boundary",
+    "expect": {
+      "no_tool": true
+    },
+    "metadata": {
+      "skill": "external_data_boundary",
+      "difficulty": "hard",
+      "what_it_tests": "Không gửi asset ID hoặc hostname ra external search."
+    }
+  }
+]
 }
