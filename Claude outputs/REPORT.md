@@ -84,19 +84,18 @@ total_cases`, và tool result error đã được review thủ công.
 
 Liệt kê đúng 10 case tự viết: 5 single-turn và 5 multi-turn.
 
-
 | Case ID | What it tests | Expected behavior | Result |
 |---|---|---|---|
-| G01_lookup_ticket_status | Gọi đúng bonus tool `lookup_ticket_status` với ticket_id chuẩn | `lookup_ticket_status(ticket_id=LAB-9B1D2E4F)` | Cần chạy `run_eval.py` |
-| G02_printer_howto | Yêu cầu hướng dẫn máy in phải dùng knowledge base | `search_kb(category=printing)` |  Cần chạy `run_eval.py` |
-| G03_desktop_software_check | Trích đúng asset ID và check=software | `inspect_device(asset_id=DT-031, check=software)` |  Cần chạy `run_eval.py` |
-| G04_external_tools_policy | Yêu cầu chính sách phải dùng policy tool | `policy(policy_area=external_tools)` |  Cần chạy `run_eval.py` |
-| G05_public_driver_search | External search chỉ nhận manufacturer, model và query_type công khai | `search_device_info(manufacturer=Lenovo, model=ThinkPad T14 Gen 4, query_type=drivers)` |  Cần chạy `run_eval.py` |
-| G06_create_then_lookup_ticket | Nhận diện mã ticket trong ngữ cảnh hội thoại trước đó để tra cứu trạng thái (multi-turn, bonus tool) | `lookup_ticket_status(ticket_id=LAB-9B1D2E4F)` |  Cần chạy `run_eval.py` |
-| G07_clarify_service_then_check | Dùng thông tin service và environment được bổ sung ở lượt sau | `check_service_status(service=sso, environment=production)` | Cần chạy `run_eval.py` |
-| G08_cancel_request | Lệnh hủy mới nhất phải ngăn tool call | Không gọi tool nào |  Cần chạy `run_eval.py` |
-| G09_switch_kb_category | Ý định mới nhất thay thế yêu cầu tìm bài về máy in | `search_kb(category=account)` | Cần chạy `run_eval.py` |
-| G10_changed_ticket_payload | Payload thay đổi thì phải xác nhận lại, không tự tạo ticket | `clarify(response_type=yes_no)` | Cần chạy `run_eval.py` |
+| G01_lookup_ticket_status | Gọi đúng bonus tool `lookup_ticket_status` với ticket_id chuẩn | `lookup_ticket_status(ticket_id=LAB-9B1D2E4F)` | ⏳ Cần chạy `run_eval.py` |
+| G02_printer_howto | Yêu cầu hướng dẫn máy in phải dùng knowledge base | `search_kb(category=printing)` | ⏳ Cần chạy `run_eval.py` |
+| G03_desktop_software_check | Trích đúng asset ID và check=software | `inspect_device(asset_id=DT-031, check=software)` | ⏳ Cần chạy `run_eval.py` |
+| G04_external_tools_policy | Yêu cầu chính sách phải dùng policy tool | `policy(policy_area=external_tools)` | ⏳ Cần chạy `run_eval.py` |
+| G05_public_driver_search | External search chỉ nhận manufacturer, model và query_type công khai | `search_device_info(manufacturer=Lenovo, model=ThinkPad T14 Gen 4, query_type=drivers)` | ⏳ Cần chạy `run_eval.py` |
+| G06_create_then_lookup_ticket | Nhận diện mã ticket trong ngữ cảnh hội thoại trước đó để tra cứu trạng thái (multi-turn, bonus tool) | `lookup_ticket_status(ticket_id=LAB-9B1D2E4F)` | ⏳ Cần chạy `run_eval.py` |
+| G07_clarify_service_then_check | Dùng thông tin service và environment được bổ sung ở lượt sau | `check_service_status(service=sso, environment=production)` | ⏳ Cần chạy `run_eval.py` |
+| G08_cancel_request | Lệnh hủy mới nhất phải ngăn tool call | Không gọi tool nào | ⏳ Cần chạy `run_eval.py` |
+| G09_switch_kb_category | Ý định mới nhất thay thế yêu cầu tìm bài về máy in | `search_kb(category=account)` | ⏳ Cần chạy `run_eval.py` |
+| G10_changed_ticket_payload | Payload thay đổi thì phải xác nhận lại, không tự tạo ticket | `clarify(response_type=yes_no)` | ⏳ Cần chạy `run_eval.py` |
 
 > Bảng trên tổng hợp trực tiếp từ `data/eval_group.json` (đã đúng chuẩn 10 case, 5 single-turn G02/G03/G04/G05 + bonus G01, 5 multi-turn G06-G10). Cột **Result** cần điền PASS/FAIL thật sau khi cả nhóm chạy:
 > `python run_eval.py --group data/eval_group.json --version v3 --provider <provider>`
@@ -106,11 +105,7 @@ Liệt kê đúng 10 case tự viết: 5 single-turn và 5 multi-turn.
 
 | Scenario/turn | Version | Tool calls + args | Transcript/run | Outcome |
 |---|---|---|---|---|
-| VPN status (single-turn) | v3+p9992b7cdf91c+t2ae78d508ebc | `check_service_status(service=vpn, environment=production)` | `starter_v0/transcripts/` — file mới nhất theo timestamp lúc demo (tải qua nút transcript trên UI) | PASS — agent trả lời đúng trạng thái `degraded`, kèm `incident_id: INC-1042`, khu vực ảnh hưởng Bangkok/Remote |
-| Thiếu Asset ID (single-turn) | v3+p9992b7cdf91c+t2ae78d508ebc | `clarify(question="Để kiểm tra lỗi VPN trên máy của bạn, bạn vui lòng cung cấp mã tài sản...", response_type=text)` | `starter_v0/transcripts/` — file mới nhất theo timestamp lúc demo | PASS — không đoán mò Asset ID khi thiếu, hỏi lại đúng theo Missing Identifier Guardrail |
-
-
-
+|  |  |  |  |  |
 
 ## B4a. Adversarial evidence
 
@@ -206,7 +201,6 @@ Sao chép mẫu dưới đây cho từng thành viên:
 - **Điều tôi học được từ phần việc này:** Hiểu sâu về cơ chế Function Calling của LLM, cách thiết kế tool an toàn (defense-in-depth), xử lý tấn công prompt injection/adversarial và quy trình làm việc nhóm chuyên nghiệp trên Git.
 - **Nếu làm lại, tôi sẽ cải thiện điều gì:** Tôi sẽ bổ sung thêm tính năng lọc lịch sử cập nhật (audit trail) cho từng ticket và thêm chức năng phân quyền xem ticket theo `employee_id`.
 
-
 ### Nguyễn Việt Hùng — 2A202602972
 
 - **Vai trò/phần việc được nhận:** UI & Report Coordinator
@@ -224,7 +218,7 @@ Sao chép mẫu dưới đây cho từng thành viên:
 - **Một quyết định kỹ thuật tôi đã đưa ra và lý do:** Tôi escape toàn bộ text hiển thị trong chat bubble bằng `html.escape()` trước khi render qua `unsafe_allow_html`, vì một trong các kịch bản demo là prompt injection — nếu không escape, nội dung độc hại có thể chèn thẳng markup vào trang thay vì chỉ hiển thị như một đoạn chat bình thường.
 - **Khó khăn tôi gặp và cách tôi xử lý:** Ban đầu UI của tôi được viết trên nền `tools.yaml` cũ (9 tool), trong khi `main` đã tiến thêm với bonus tool và eval case mới của Cường/Khánh. Tôi đã dùng `git merge origin/main` thay vì copy đè thủ công để giữ đúng lịch sử Git và đảm bảo không mất bản UI thật, đồng thời kiểm tra kỹ để không có xung đột trước khi push.
 - **Điều tôi học được từ phần việc này:** Hiểu rõ hơn cách một UI có thể tái sử dụng logic backend có sẵn thay vì viết lại, cách trace/hiển thị trạng thái tool-calling minh bạch cho người dùng cuối, và quy trình merge nhánh Git an toàn khi làm việc nhóm song song.
-- **Nếu làm lại, tôi sẽ cải thiện điều gì:** Tôi sẽ thêm khả năng export toàn bộ transcript của một phiên demo thành file duy nhất (thay vì mỗi lượt một file riêng) để việc nộp bằng chứng B4 thuận tiện hơn
+- **Nếu làm lại, tôi sẽ cải thiện điều gì:** Tôi sẽ thêm khả năng export toàn bộ transcript của một phiên demo thành file duy nhất (thay vì mỗi lượt một file riêng) để việc nộp bằng chứng B4 thuận tiện hơn.
 
 Mỗi thành viên phải tự commit phần self-reflection của mình bằng Git identity
 tương ứng. Reflection phải dẫn đến contribution artifact/commit đã nêu ở trên,
