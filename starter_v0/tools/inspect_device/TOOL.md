@@ -10,6 +10,5 @@ side_effect: false
 ---
 # inspect_device
 
-Looks up one company asset and returns its stored diagnostic snapshot. A valid
-asset ID is required. Supported checks are all, network, vpn, security,
-hardware, and software.
+Tra cứu một thiết bị trong kho tài sản của công ty và trả về snapshot chẩn đoán đã lưu.
+Cần có asset ID hợp lệ. Các kiểu kiểm tra hỗ trợ gồm all, network, vpn, security, hardware và software.

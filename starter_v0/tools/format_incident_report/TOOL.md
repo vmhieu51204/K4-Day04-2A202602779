@@ -9,5 +9,5 @@ side_effect: false
 ---
 # format_incident_report
 
-Formats findings already collected by other tools. It does not inspect devices,
-check service status, search knowledge, or create tickets.
+Định dạng các findings đã được thu thập từ các tool khác. Tool này không kiểm tra thiết bị,
+không xem trạng thái dịch vụ, không tìm kiếm knowledge base hay tạo ticket.

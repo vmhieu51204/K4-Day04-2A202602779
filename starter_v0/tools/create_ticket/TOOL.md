@@ -11,7 +11,6 @@ requires_confirmation: true
 ---
 # create_ticket
 
-Creates a local mock helpdesk ticket under `tickets/`. It returns
-`needs_confirmation` and writes nothing unless `confirmed` is explicitly true.
-It rejects invalid asset IDs and ticket summaries containing credentials,
-tokens, MFA values, or recovery codes.
+Tạo một ticket hỗ trợ giả lập dưới thư mục `tickets/`. Tool sẽ trả về trạng thái
+`needs_confirmation` và không ghi gì nếu `confirmed` chưa được đặt là true một cách rõ ràng.
+Tool từ chối asset ID không hợp lệ và các summary chứa credentials, token, mã MFA hoặc recovery code.

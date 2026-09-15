@@ -10,5 +10,5 @@ side_effect: false
 ---
 # lookup_user
 
-Looks up one fictional employee by employee ID and returns support-safe work
-metadata plus assigned asset IDs. It never returns credentials or secrets.
+Tra cứu một nhân viên giả lập theo employee ID và trả về metadata hỗ trợ cùng danh sách asset được giao.
+Tool này không bao giờ trả về thông tin đăng nhập, mật khẩu hoặc bí mật.

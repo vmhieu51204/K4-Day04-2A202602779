@@ -9,5 +9,5 @@ side_effect: false
 ---
 # clarify
 
-Returns a question to the user and pauses until the next user turn.
-`response_type` is free text, yes/no, or a choice from `options`.
+Hỏi người dùng để lấy thông tin còn thiếu hoặc xác nhận cần thiết và tạm dừng cho đến lượt tiếp theo của người dùng.
+`response_type` có thể là văn bản tự do, yes/no hoặc lựa chọn từ `options`.

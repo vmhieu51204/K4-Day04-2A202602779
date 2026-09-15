@@ -10,5 +10,5 @@ side_effect: false
 ---
 # check_service_status
 
-Reads the deterministic mock status page for a named shared service and
-environment. It does not diagnose a single employee device.
+Đọc trang trạng thái mô phỏng cố định cho một dịch vụ dùng chung và môi trường tương ứng.
+Tool này không chẩn đoán thiết bị cá nhân của nhân viên.
