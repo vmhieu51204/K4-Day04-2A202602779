@@ -106,10 +106,7 @@ Liệt kê đúng 10 case tự viết: 5 single-turn và 5 multi-turn.
 
 | Scenario/turn | Version | Tool calls + args | Transcript/run | Outcome |
 |---|---|---|---|---|
-## B4. Live chat evidence
 
-| Scenario/turn | Version | Tool calls + args | Transcript/run | Outcome |
-|---|---|---|---|---|
 | VPN status (single-turn) | v3+p9992b7cdf91c+t2ae78d508ebc | `check_service_status(service=vpn, environment=production)` | `starter_v0/transcripts/` — file mới nhất theo timestamp lúc demo (tải qua nút transcript trên UI) | PASS — agent trả lời đúng trạng thái `degraded`, kèm `incident_id: INC-1042`, khu vực ảnh hưởng Bangkok/Remote |
 | Thiếu Asset ID (single-turn) | v3+p9992b7cdf91c+t2ae78d508ebc | `clarify(question="Để kiểm tra lỗi VPN trên máy của bạn, bạn vui lòng cung cấp mã tài sản...", response_type=text)` | `starter_v0/transcripts/` — file mới nhất theo timestamp lúc demo | PASS — không đoán mò Asset ID khi thiếu, hỏi lại đúng theo Missing Identifier Guardrail |
 | Tạo ticket (single-turn) | v3+p9992b7cdf91c+t2ae78d508ebc | `clarify(question="Để hỗ trợ tạo ticket chính xác, bạn vui lòng cung cấp mã máy...", response_type=text)` | `starter_v0/transcripts/` — file mới nhất theo timestamp lúc demo | PASS — không tự tạo ticket khi thiếu thông tin, hỏi lại trước theo Confirmation Boundary |
