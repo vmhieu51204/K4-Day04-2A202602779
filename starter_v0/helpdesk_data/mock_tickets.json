@@ -1,0 +1,37 @@
+{
+  "tickets": [
+    {
+      "ticket_id": "LAB-9B1D2E4F",
+      "summary": "VPN connection failed with AUTH_TIMEOUT",
+      "priority": "high",
+      "status": "in_progress",
+      "asset_id": "LT-204",
+      "reporter_id": "EMP-1001",
+      "assigned_technician": "IT-Support-Tier2",
+      "created_at": "2026-09-13T14:30:00Z",
+      "resolution_notes": "Đang kiểm tra chứng chỉ số và cấu hình VPN client của máy LT-204."
+    },
+    {
+      "ticket_id": "LAB-A1B2C3D4",
+      "summary": "Yêu cầu cấp chuột Bluetooth và bàn phím ngoài",
+      "priority": "low",
+      "status": "resolved",
+      "asset_id": "LT-318",
+      "reporter_id": "EMP-1005",
+      "assigned_technician": "IT-Hardware-Desk",
+      "created_at": "2026-09-12T09:00:00Z",
+      "resolution_notes": "Đã bàn giao thiết bị tại tầng 3 cho nhân viên Eva Lim."
+    },
+    {
+      "ticket_id": "LAB-5C6D7E8F",
+      "summary": "Màn hình ngoài nhấp nháy khi cắm cổng HDMI",
+      "priority": "medium",
+      "status": "open",
+      "asset_id": "LT-240",
+      "reporter_id": "EMP-1002",
+      "assigned_technician": "Unassigned",
+      "created_at": "2026-09-14T08:15:00Z",
+      "resolution_notes": "Mới tiếp nhận yêu cầu, đang chờ phân công kỹ thuật viên."
+    }
+  ]
+}
